@@ -1,3 +1,7 @@
 
 # Claude Code context checkpoints (runtime data, not versioned)
 .claude/checkpoints/
+
+# Python bytecode
+__pycache__/
+*.pyc

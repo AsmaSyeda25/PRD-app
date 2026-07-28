@@ -1,0 +1,3 @@
+
+# Claude Code context checkpoints (runtime data, not versioned)
+.claude/checkpoints/

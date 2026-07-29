@@ -48,6 +48,12 @@ IDD/vendor docs) — that is a future add-on. Never assert a mapping is
 - Diagram-bearing section: confirm the image is embedded.
 - Table with empty cells: confirm none are required data.
 
+## Canonical structure decisions (do not revert)
+- **Customer Responsibilities is its own chapter (Chapter 2)**, between
+  Introduction and Overview — by decision. Do **not** fold it under Technical
+  Solution. `template-structure.json` and `nice-cig-writer` are both aligned to
+  this; keep them in sync if either changes.
+
 ## Structure placement note
 The template lists the "Agent Activity" subsections (Generation Convention,
 Summary, Details, Scenario Considerations, Observations) under Chapter 5

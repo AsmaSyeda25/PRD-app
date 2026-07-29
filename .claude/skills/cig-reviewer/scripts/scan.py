@@ -29,7 +29,7 @@ SPEC_TOKEN = re.compile(
     r'node|rc|id)\b', re.I)
 
 SCAFFOLDING = [
-    r'^\s*Example\s*:', r'The documentation team will create',
+    r'^\s*Example\s*:?\s*$', r'The documentation team will create',
     r'\(This section outlines', r'should be provided if they provide',
     r'\(Architecture\s*\)', r'Mapping of Vendor Attributes to WFM Attributes',
     r'Indicate each', r'Provide specifics on', r'Summary of connectivity',
@@ -44,7 +44,8 @@ AUTHOR_NOTE = re.compile(
     r'\b(TBD|TODO|FIXME|XXX)\b|not sure|to be decided|will be decided|'
     r'will be final(?:e|ize)|to be finalized|to be verified|needs? to be verified|'
     r'verify when|should be verified when|placeholder|lorem ipsum|'
-    r'fill in|<comment>|\?\?\?|to be confirmed|to be added', re.I)
+    r'replace before publishing|fill in|<comment>|\?\?\?|to be confirmed|to be added',
+    re.I)
 
 # interval / version / product signals for consistency seeding
 INTERVAL = re.compile(r'\b(15|30)[-\s]?minute\b', re.I)

@@ -174,6 +174,7 @@ def main():
             f'</w:comment>')
     cparts.append('</w:comments>')
     comments_xml = ''.join(cparts)
+    comment_elems = ''.join(cparts[1:-1])  # just the <w:comment> nodes
 
     # [Content_Types].xml
     ct = zin.read('[Content_Types].xml').decode('utf-8', 'ignore')
@@ -197,9 +198,26 @@ def main():
                 zout.writestr(n, ct)
             elif n == rels_name:
                 zout.writestr(n, rels)
+            elif n == 'word/comments.xml':
+                # MERGE our comments into an existing comments part (e.g. one
+                # that docx-js shipped) instead of dropping them.
+                existing = zin.read(n).decode('utf-8', 'ignore')
+                if comment_elems:
+                    if '</w:comments>' in existing:
+                        existing = existing.replace('</w:comments>', comment_elems + '</w:comments>', 1)
+                    else:
+                        # self-closing <w:comments .../> -> open, insert, close
+                        m = re.search(r'<w:comments\b[^>]*/>', existing)
+                        if m:
+                            open_tag = m.group(0)[:-2] + '>'
+                            existing = (existing[:m.start()] + open_tag +
+                                        comment_elems + '</w:comments>' + existing[m.end():])
+                        else:
+                            existing = comments_xml  # no recognizable part; use ours
+                zout.writestr(n, existing)
             else:
                 zout.writestr(n, zin.read(n))
-        if 'word/comments.xml' not in names:
+        if comments and 'word/comments.xml' not in names:
             zout.writestr('word/comments.xml', comments_xml)
 
     json.dump({"comments_written": len(comments),

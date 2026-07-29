@@ -81,7 +81,7 @@ first. Majors/Minors are the writer's punch-list and never flip a READY to
 NOT READY on their own.
 
 ### 5. Deliverables
-Produce **two** files next to the guide:
+Produce **three** files next to the guide:
 
 **(a) `<guide>_GATE_REVIEW.md`** — the human-readable gate report:
 - Verdict banner (`🔴 NOT READY` / `🟢 READY`) with blocker/major/minor counts.
@@ -106,6 +106,24 @@ Every finding becomes a Word **comment**; when `after` is set and `before` sits
 in a single run, it also becomes an **Accept/Reject tracked change**. Comments
 never alter text, so the file stays valid even if a match is imperfect. For
 richer tracked changes across runs, you may additionally use the `docx` skill.
+
+**(c) `<guide>_REVIEW.docx`** — the *review copy*: the redlined guide with a
+**verdict cover sheet as page 1** (verdict banner + counts + the blockers/
+findings table), so the outcome is visible the moment the file opens. Write a
+spec and run it on the redlined `.docx` so the review copy carries both the
+cover sheet and the margin comments:
+```bash
+python3 scripts/review_cover.py "<guide>_redlined.docx" /tmp/review_spec.json "<guide>_REVIEW.docx"
+```
+`review_spec.json` schema:
+```json
+{"verdict":"NOT READY","blockers":9,"majors":1,"minors":4,
+ "note":"one-paragraph reviewer note",
+ "table_title":"Blockers - must clear before publish",
+ "columns":["#","Section","What to supply"],
+ "rows":[["1","Overview -> Media Channels","..."]]}
+```
+The banner is red for NOT READY, green for READY, and pluralizes the counts.
 
 ### 6. Report back
 Summarize the verdict and top blockers in chat, and point to the two output

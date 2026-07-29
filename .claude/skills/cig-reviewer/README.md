@@ -26,6 +26,8 @@ punch-list.
 - `<guide>_GATE_REVIEW.md` — verdict + prioritized findings with Before → After
 - `<guide>_redlined.docx` — Word **comments** on every finding, plus
   **Accept/Reject tracked changes** for clean text replacements
+- `<guide>_REVIEW.docx` — *review copy*: the redlined guide with a **verdict
+  banner + blockers table as page 1**, so the outcome shows the moment it opens
 
 ## Files
 | Path | Purpose |
@@ -36,6 +38,7 @@ punch-list.
 | `scripts/extract.py` | `.docx` → structured JSON (outline, blocks, tables, cover) |
 | `scripts/scan.py` | Automated detectors → candidate findings JSON |
 | `scripts/apply_redlines.py` | Writes comments + tracked changes into the `.docx` |
+| `scripts/review_cover.py` | Prepends the verdict banner + blockers table as page 1 (the review copy) |
 
 Scripts are pure-stdlib Python 3 (no external dependencies).
 

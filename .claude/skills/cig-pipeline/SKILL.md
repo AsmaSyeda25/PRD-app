@@ -67,9 +67,11 @@ python3 scripts/run_state.py init "$RUN" --guide "<path-or-name>" --mode create|
    as `$GUIDE`. Confirm Distribution Status = **Draft**.
 
 ### Gate 2 — Review (every round)
-1. **Invoke `cig-reviewer` on `$GUIDE`.** Get: verdict (READY / NOT READY),
-   the per-section scorecard, the findings grouped Blocker/Major/Minor, and the
-   redlined `.docx`.
+1. **Invoke `cig-reviewer` on `$GUIDE`.** Get its three deliverables: the
+   `GATE_REVIEW.md` (verdict + per-section scorecard + findings), the redlined
+   `.docx` (margin comments), and the `_REVIEW.docx` **review copy** (verdict
+   banner + blockers table on page 1). Surface the review copy to the human at
+   Gate 3 — it's the at-a-glance artifact.
 2. Count blockers `B`, majors `M`, minors `m`. Record the round:
    ```bash
    python3 scripts/run_state.py record "$RUN" --round <N> \
